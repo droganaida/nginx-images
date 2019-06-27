@@ -27,6 +27,7 @@ map $http_accept $webp_suffix {
 
 ## Открываем sites-available/dafault
 Описываем 2 location в нужной секции server {}
+
 Поддержка webp:
 ```
 location ~* ^.+\.(jpe?g|png) {
@@ -52,6 +53,7 @@ location ~ ^/img([0-9]+)(?:/(.*))?$ {
 ```
 
 Если Image-Filter не установлен, читаем инструкции https://docs.nginx.com/nginx/admin-guide/dynamic-modules/image-filter/
+
 Проверяем конфигурацию NGINX:
 ```
 sudo nginx -t
