@@ -68,3 +68,17 @@ sudo service nginx reload
 ```
 http://your-domain.com/img120/image.jpg
 ```
+
+Если сервер отдает 404 на ресурс с изображением (по какой-то причине нет webp для этого файла), можно переписать location с изображениями так:
+```
+location ~ ^/img([0-9]+)(?:/(.*))?$ {
+set $img_url $uri$webp_suffix;
+   if (!-f $request_filename$webp_suffix) {
+       set $img_url $uri;
+   }
+   add_header Cache-Control "public, no-transform";
+   add_header Vary "Accept-Encoding";
+   try_files $img_url $uri =404;
+   expires max;
+}
+```
